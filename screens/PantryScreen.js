@@ -8,12 +8,14 @@ import ScanButton from "../components/PantryPageComponents/ScanButton.js";
 import Scroller from "../components/ScrollView.js";
 import PantrySearchBar from "../components/PantryPageComponents/PantrySearchBar.js";
 import react, {useEffect, useState} from 'react';
+import PantryHeader from "../components/PantryHeader.js";
 const PantryScreen = ({ navigation }) => {
   const [searchText, setSearchText] = useState("");
   return (
       <View style={styles.container}>
+        <PantryHeader />
         <View style={styles.containerHorizontal}>
-        
+ 
         <PantrySearchBar style={styles.searchBar} searchText={searchText} setSearchText={setSearchText}/>
         <ScanButton navigation={navigation}></ScanButton>
         </View>

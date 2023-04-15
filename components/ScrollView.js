@@ -12,7 +12,7 @@ function Scroller({items}) {
         async function getIngredients () {
         try {
             let response = fetch(
-                'http://192.168.1.93:3001/pantry'
+                'https://pantri-server.herokuapp.com/pantry'
             ).then((response) => response.json())
                 .then((json) => {
                     var ingredients = [];
@@ -42,7 +42,7 @@ function Scroller({items}) {
                                 <Pressable style={styles.removebutton}
             
                                     onPress={() => {
-                                        fetch('http://192.168.1.93:3001/delete/pantry', {
+                                        fetch('https://pantri-server.herokuapp.com/delete/pantry', {
                                             method: 'POST',
                                             headers: { "Conent-Type": "application/json" },
                                             body: item.ingredient

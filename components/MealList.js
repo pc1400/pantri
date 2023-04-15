@@ -16,7 +16,7 @@ function MealList({ items, navigation }) {
         async function getRecipes() {
             try {
                 let response = fetch(
-                    'http://192.168.1.93:3001/recipes'
+                    'https://pantri-server.herokuapp.com/recipes'
                 ).then((response) => response.json())
                     .then((json) => {
                         var recipes = [];

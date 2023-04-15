@@ -1,64 +1,47 @@
 
 import {  View, Text, Image, Pressable} from 'react-native';
 import {styles} from "../components/StyleSheet.js";
+import ScanButton from "../components/PantryPageComponents/ScanButton.js";
 const menuBar =  navigation  => {
     return (
       
       <View style={styles.menu}>
         <Pressable style={styles.menubutton}
-          
           onPress={() =>
             navigation.navigate('Home')
           }
           >
-
             <Image 
                 style={styles.tinyLogo}
-                source={require('../assets/home.png')}
+                source={require('../assets/book.png')}
             />
-            <Text style={styles.logoText}>Home</Text>
+            {/* <Text style={styles.logoText}>Recipes</Text> */}
           </Pressable>
+        <ScanButton navigation={navigation}></ScanButton>
         <Pressable style={styles.menubutton}
-          
-          onPress={() =>
-            navigation.navigate('Grocery')
-          }
-          >
-            <Image 
-               style={styles.tinyLogo}
-                source={require('../assets/grocery.png')}
-            />
-            <Text style={styles.logoText}>Grocery</Text>
-            </Pressable>
-        <Pressable style={styles.menubutton}
-          
           onPress={() =>
             navigation.navigate('Pantry')
           }
         ><Image 
         style={styles.tinyLogo}
-        source={require('../assets/shelving.png')}
+        source={require('../assets/pantryOther.png')}
         />
-        <Text style={styles.logoText}>Pantry</Text>
         </Pressable>
-        <Pressable style={styles.menubutton}
-          
-          onPress={() =>
-            navigation.navigate('Settings')
-          }
-          >
-            <Image 
-                style={styles.tinyLogo}
-                source={require('../assets/settings.png')}
-            />
-            <Text style={styles.logoText}>Settings</Text>
-          </Pressable>
-          
       </View>
     )
     ;
-   
-    
   };
 
   export {menuBar};
+
+  // <Pressable style={styles.menubutton}
+  // onPress={() =>
+  //   navigation.navigate('scan')
+  // }
+  // >
+  //   <Image 
+  //      style={styles.tinyLogo}
+  //       source={require('../assets/scan.png')}
+  //   />
+  //   {/* <Text style={styles.logoText}>Scan</Text> */}
+  //   </Pressable>

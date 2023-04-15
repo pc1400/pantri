@@ -14,7 +14,7 @@ const GrocerySearchBar = (props) => {
                 onChangeText={onChangeText}
                 value={text}
                 onSubmitEditing={async () => {
-                    fetch('http://192.168.1.93:3001/groceries', {
+                    fetch('https://pantri-server.herokuapp.com/groceries', {
                         method: 'POST',
                         headers: {"Conent-Type": "application/json"},
                         body: text

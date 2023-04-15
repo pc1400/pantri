@@ -11,7 +11,7 @@ function GroceryScroller({items}) {
         async function getIngredients () {
         try {
             let response = fetch(
-                'http://192.168.1.93:3001/groceries'
+                'https://pantri-server.herokuapp.com/groceries'
             ).then((response) => response.json())
                 .then((json) => {
                     var ingredients = [];
@@ -40,7 +40,7 @@ function GroceryScroller({items}) {
                         <Text style= {styles.scrolltext}>{item.ingredient}</Text>
                         <Pressable style={styles.removebutton}
                             onPress={() => {
-                                fetch('http://192.168.1.93:3001/delete/groceries', {
+                                fetch('https://pantri-server.herokuapp.com/delete/groceries', {
                                 method: 'POST',
                                 headers: {"Conent-Type": "application/json"},
                                 body: item.ingredient
@@ -49,7 +49,7 @@ function GroceryScroller({items}) {
                             }}
                             ><Image 
                             style={styles.removeLogo}
-                            source={require('/Users/patrickcunningham/Programming/recipe/recipe/assets/delete.png')}
+                            source={require('../../assets/delete.png')}
                             />
                             </Pressable>
                     </View>

@@ -16,13 +16,14 @@ const styles = StyleSheet.create({
       opacity: 0.5,
     },
     roundButton: {
-      width: 60,
-      height: 60,
+      // position: 'center',
+      // top: 10,
+      // left: 0,
       justifyContent: 'center',
       alignItems: 'center',
       padding: 10,
-      borderRadius: 50,
-      backgroundColor: '#ffb265',
+      paddingHorizontal: 30
+
     },
     scrollview: {
       width:Dimensions.get('window').width,
@@ -81,8 +82,8 @@ const styles = StyleSheet.create({
       fontWeight: "bold"
     },
     space: {
-      width:20,
-      height: 20,
+      width: 25,
+      height: 25,
     },
     Extraspace: {
       width:20,
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
       bottom : 0,
       height: 80,
       width:Dimensions.get('window').width,
-      backgroundColor: '#ffb265'
+      backgroundColor: '#D3D3D3'
     },
     menubutton: {
       
@@ -143,8 +144,8 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     tinyLogo: {
-      width: 30,
-      height: 30,
+      width: 45,
+      height: 45,
     },
     removebutton: {
       position: 'absolute',
@@ -174,7 +175,15 @@ const styles = StyleSheet.create({
     },
     logoText:{
       margin: 4,
-      fontSize: 10
+      fontSize: 10,
+      color: '#FFFFFF'
+    },
+    mainText:{
+      margin: 1,
+      fontSize: 40,
+      color: '#087830',
+      fontFamily: 'Helvetica',
+      fontWeight: '100',
     },
     listscrollview: {
       flex: 1,
