@@ -21,8 +21,7 @@ const HomeScreen = ({ navigation }) => {
       //     />
       
       <View style={styles.container}>
-
-
+        <AppHeader />
         <FeaturedTab onPress={() =>
             navigation.navigate('Featured')}/>
         <View style={styles.space} />
