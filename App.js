@@ -20,7 +20,7 @@ import AsparagusDetailScreen from './screens/FeaturedMealScreens/AsparagusDetail
 import SaladDetailScreen from './screens/FeaturedMealScreens/SaladDetails.js';
 
 
-import IngredientList from '/Users/patrickcunningham/Programming/pantri/screens/IngredientList.js';
+import IngredientList from './screens/IngredientList.js';
 
 const Stack = createNativeStackNavigator();
 //const Tab = createBottomTabNavigator();
