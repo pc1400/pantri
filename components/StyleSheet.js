@@ -3,9 +3,9 @@ import { Dimensions } from 'react-native'
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#ebebeb',
-      alignItems: 'center',
-      justifyContent: 'center',
+      backgroundColor: '#ffffff',
+      // alignItems: 'center',
+      // justifyContent: 'center',
       
 
       
@@ -16,13 +16,14 @@ const styles = StyleSheet.create({
       opacity: 0.5,
     },
     roundButton: {
-      width: 60,
-      height: 60,
+      // position: 'center',
+      // top: 10,
+      // left: 0,
       justifyContent: 'center',
       alignItems: 'center',
       padding: 10,
-      borderRadius: 50,
-      backgroundColor: '#ffb265',
+      paddingHorizontal: 30
+
     },
     scrollview: {
       width:Dimensions.get('window').width,
@@ -31,45 +32,28 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-start',
       height: Dimensions.get('window').height * .6,
       position: 'absolute',
-      bottom: 90
-      
+      bottom: 20
     },
     scrollitem:{
-      
       flexDirection: 'row',
-      width:Dimensions.get('window').width * .85,
+      width:Dimensions.get('window').width * .75,
       fontSize: 25,
       padding:7,
       margin:5,
-      backgroundColor: '#ffb265',
-      borderRadius: 15,
+      backgroundColor: '#ffffff',
+      borderRadius: 10,
+      shadowColor: '#171717',
+      shadowOffset: {width: 0, height: 0},
+      shadowOpacity: 0.4,
+      shadowRadius: 3,
     },
     scrolltext:{
       padding:7,
-      fontSize: 25,
-      
-    },
-    profilePic: {
-      width: 100,
-      height: 100,
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 10,
-      borderRadius: 50,
-      backgroundColor: 'gray',
-    },
-    settingsStyle: {
-      width: 300,
-      height: 50,
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 10,
-      borderRadius: 20,
-      backgroundColor: '#ffb265',
+      fontSize: 20,
     },
     containerProfile: {
       //flex: 2,
-      backgroundColor: '#ebebeb',
+      backgroundColor: '#ffffff',
       alignItems: 'center',
       fontSize: 20,
       fontWeight: "bold"
@@ -81,8 +65,8 @@ const styles = StyleSheet.create({
       fontWeight: "bold"
     },
     space: {
-      width:20,
-      height: 20,
+      width: 25,
+      height: 25,
     },
     Extraspace: {
       width:20,
@@ -102,19 +86,21 @@ const styles = StyleSheet.create({
     },
     containerHorizontal: {
       flex: 1,
-      backgroundColor: '#ebebeb',
+      backgroundColor: '#ffffff',
       flexDirection: 'row',
       alignItems: 'center',
       position: 'absolute',
+      margin: 30,
       top: 80
       //justifyContent: 'center',
       //margin: 16,
     },
-    containerSearch:{
+  containerSearch: {
       margin: 10,
-      width: 270,
+      width:Dimensions.get('window').width * .75,
     },
     input: {
+
       backgroundColor: '#ebebeb',
       padding: 10,
       borderRadius: 10,
@@ -127,15 +113,14 @@ const styles = StyleSheet.create({
       position: 'absolute',
       justifyContent: 'center',
       bottom : 0,
-      height: 80,
+      height: 60,
       width:Dimensions.get('window').width,
-      backgroundColor: '#ffb265'
+      // backgroundColor: '#F0F0F0',
+      borderTopWidth: 2,
+      borderColor: '#000000',
+    
     },
     menubutton: {
-      
-      
-     
-     
       paddingHorizontal: 25,
       paddingVertical: 30,
       borderRadius:10,
@@ -143,8 +128,8 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     tinyLogo: {
-      width: 30,
-      height: 30,
+      width: 40,
+      height: 40,
     },
     removebutton: {
       position: 'absolute',
@@ -161,11 +146,12 @@ const styles = StyleSheet.create({
       width: 30,
       height: 30,
       justifyContent: 'center',
+      
       alignItems: 'center',
     },
     containerSettings: {
       flex: 1,
-      backgroundColor: '#ebebeb',
+      backgroundColor: '#ffffff',
       alignItems: 'center',
       justifyContent: 'center',
       padding: 110,
@@ -174,18 +160,24 @@ const styles = StyleSheet.create({
     },
     logoText:{
       margin: 4,
-      fontSize: 10
+      fontSize: 10,
+      color: '#FFFFFF'
+    },
+    mainText:{
+      margin: 1,
+      fontSize: 40,
+      color: '#087830',
+      fontFamily: 'Helvetica',
+      fontWeight: '100',
     },
     listscrollview: {
       flex: 1,
       flexDirection: 'row',
       width:Dimensions.get('window').width,
-      borderRadius: 0,
+      padding: 10,
       alignItems: 'center',
       justifyContent: 'flex-start',
       height: Dimensions.get('window').height -20,
-      
-      
     },
     listscrollitem:{
       flex: 1,
@@ -194,7 +186,7 @@ const styles = StyleSheet.create({
       fontSize: 25,
       padding:7,
       margin:5,
-      backgroundColor: '#ffb265',
+      backgroundColor: '#ffffff',
       borderRadius: 15,
       justifyContent: 'flex-start',
     },
@@ -206,19 +198,14 @@ const styles = StyleSheet.create({
   },
     containerMeals: {
       flex: 1,
-      backgroundColor: '#ebebeb',
-      alignItems: 'center',
-      justifyContent: 'center',
+      backgroundColor: '#ffffff',
       padding: 10,
-      
-      
       //margin: 16,
     },
     integratedstyling: {
       //flex: 1,
-      backgroundColor:'#ffb265',
-      alignItems: 'center',
-      justifyContent: 'center',
+      backgroundColor:'#ffffff',
+      alignItems: 'left',
       padding: 10,
       borderRadius: 20,
     },
@@ -231,6 +218,30 @@ const styles = StyleSheet.create({
       fontSize: 25,
       borderRadius: 15,
       backgroundColor: '#ffb265',
+    },
+    saladButton: {
+      width:Dimensions.get('window').width,
+      height: 152,
+      fontSize: 25,
+      borderRadius: 0,
+      borderWidth: 1,
+      borderColor: '#E8E8E8',
+
+    },
+    menuImage: {
+      width: 150, 
+      height: 150, 
+    },
+    menuText: {
+      paddingTop: 5,
+      paddingBottom: 10,
+      fontSize: 20,
+      fontWeight: "bold",
+      flexWrap: 'wrap'
+    },
+    menuSubText: {
+      fontSize: 17,
+      flexWrap: 'wrap'
     },
   });
 

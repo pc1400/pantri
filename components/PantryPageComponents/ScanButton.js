@@ -22,7 +22,7 @@ function ScanButton({ children, color, onPress, navigation }) {
         // make sure a image was taken:
         if (!image.canceled) {
 
-            fetch('http://192.168.1.93:3001/scan', {
+            fetch('https://pantri-server.herokuapp.com/scan', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -41,10 +41,17 @@ function ScanButton({ children, color, onPress, navigation }) {
     <View style={styles.roundButton}>
         <Pressable onPress={takeImage}>
             <View>
-                <Text>Scan</Text>
+                <Image 
+                    style={styles.tinyLogo}
+                    source={require('../../assets/scan-black.png')}
+                />
             </View>
         </Pressable>
     </View>
     );
 }
 export default ScanButton;
+
+
+
+  {/* <Text style={styles.logoText}>Recipes</Text> */}

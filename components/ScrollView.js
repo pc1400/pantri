@@ -1,24 +1,25 @@
 import { connection } from 'mongoose';
 import React, {useState, useEffect} from 'react';
 import { View, Text, ScrollView,Image, Pressable } from 'react-native';
-import {styles} from "./StyleSheet.js";
+import { styles } from "./StyleSheet.js";
 
 
 function Scroller({items}) {
     const [listItems, setList] = useState([]); 
     
     useEffect(() => {
-        
         async function getIngredients () {
         try {
             let response = fetch(
-                'http://192.168.1.93:3001/pantry'
+                'https://pantri-server.herokuapp.com/pantry'
             ).then((response) => response.json())
                 .then((json) => {
                     var ingredients = [];
                     var array = json.slice(1, -1).split(',');
                     for (var i in array) {
-                        ingredients.push({ ingredient: array[i].slice(1, -1), key: i });
+                        const name = array[i].slice(1, -1);
+                    
+                        ingredients.push({ ingredient: name.charAt(0).toUpperCase() + name.slice(1), key: i });
                     }
                     setList(ingredients);
             }).catch(error => {console.log(error)});     
@@ -37,23 +38,19 @@ function Scroller({items}) {
                     
                         return (
                             <View key={item.key} style={styles.scrollitem}>
-                            
+                                <Image style={styles.removeLogo} source={require('../assets/grocery.png')} />
                                 <Text style={styles.scrolltext}>{item.ingredient}</Text>
                                 <Pressable style={styles.removebutton}
-            
                                     onPress={() => {
-                                        fetch('http://192.168.1.93:3001/delete/pantry', {
+                                        fetch('https://pantri-server.herokuapp.com/delete/pantry', {
                                             method: 'POST',
                                             headers: { "Conent-Type": "application/json" },
                                             body: item.ingredient
                                         })
                                             .catch(error => { console.log(error) })
                                     }}
-                                ><Image
-                                        style={styles.removeLogo}
-                                        source={require('../assets/delete.png')}
-                                    />
-                                
+                                >
+                                <Image style={styles.removeLogo} source={require('../assets/delete.png')} />
                                 </Pressable>
                             </View>
                         );
@@ -65,15 +62,10 @@ function Scroller({items}) {
         );
     }
 }
-function longItem({keya, listItems}){
-    return (
-        <View key={keya}>
-            <Text >{listItems}</Text>
-        </View>
-    )
-
-}
 export default Scroller;
+
+
+
 
 
 

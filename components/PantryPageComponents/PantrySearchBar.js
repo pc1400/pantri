@@ -9,12 +9,12 @@ const PantrySearchBar = (props) => {
     return(
         <View style={styles.containerSearch}>
             <TextInput
-                placeholder='Enter'
+                placeholder='Add Item'
                 style={styles.input}
                 onChangeText={onChangeText}
                 value={text}
                 onSubmitEditing={() => {
-                    fetch('http://192.168.1.93:3001/pantry', {
+                    fetch('https://pantri-server.herokuapp.com/pantry', {
                         method: 'POST',
                         headers: {"Conent-Type": "application/json"},
                         body: text
