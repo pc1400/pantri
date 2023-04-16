@@ -11,6 +11,7 @@ import { SettingsScreen } from './screens/SettingsScreen.js';
 import { ScanScreen } from './screens/ScanScreen.js';
 import { RecipeDetailsScreen } from './screens/RecipeDetailsScreen.js';
 import FeaturedMealsOverviewScreen from './screens/FeaturedMealsOverviewScreen.js';
+import mainRecipes from './screens/mainRecipes.js';
 import MealPrepScreen from './screens/MealPrepScreen.js';
 import NormalRecipeScreen from './screens/NormalRecipeScreen.js';
 import PancakesDetailScreen from './screens/FeaturedMealScreens/PancakesDetails.js';
@@ -33,7 +34,7 @@ const App = () => {
         <Stack.Screen options={{ headerShown: false, animation: 'fade' }} name="Grocery" component={GroceryScreen} />
         <Stack.Screen options={{ headerShown: false, animation: 'fade' }} name="Pantry" component={IngredientList} /> 
         <Stack.Screen options={{ headerShown: false, animation: 'fade'}}name="Settings" component={SettingsScreen} />
-        <Stack.Screen options={{animation: 'fade'}} name="Featured" component={FeaturedMealsOverviewScreen} /> 
+        <Stack.Screen options={{animation: 'fade'}} name="Featured" component={mainRecipes} /> 
         <Stack.Screen options={{animation: 'fade'}} name="Prep" component={MealPrepScreen} />
         <Stack.Screen options={{animation: 'fade'}} name="Normal" component={NormalRecipeScreen} />
         <Stack.Screen options={{animation: 'fade'}} name="Overview" component={RecipeDetailsScreen} />

@@ -11,21 +11,19 @@ const AppHeader = () => {
 
 const styles = StyleSheet.create({
   container: {
-    // position: 'relative',
-    flex: 1,
-    marginTop: 50,
-    marginBottom: 50,
-    // top: 10,
-    // left: -80,
-    // flexDirection: 'row',
+    position: 'relative',
+    top: -260,
+    left: -90,
+    flexDirection: 'row',
+    alignItems: 'left',
     paddingVertical: 10,
     paddingHorizontal: 10,
 
   },
   title: {
-    fontSize: 40,
-    fontWeight: '500',
-    alignContent: 'center'
+    fontSize: 50,
+    color: '#087830',
+    fontWeight: '300',
   },
 });
 

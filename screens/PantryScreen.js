@@ -14,13 +14,17 @@ import IngredientList from './IngredientList.js';
 const PantryScreen = ({ navigation }) => {
   const [searchText, setSearchText] = useState("");
   return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 80 }}>
-        <ScrollView style={{ flex: 1 }}>
-          <View style={{ paddingHorizontal: 20 }}>
-            <IngredientList/>
-          </View>
-        </ScrollView>
-      {menuBar(navigation)}
+      <View style={styles.container}>
+        {/* <PantryHeader /> */}
+        <View style={styles.containerHorizontal}>
+        <PantrySearchBar style={styles.searchBar} searchText={searchText} setSearchText={setSearchText}/>
+        <ScanButton navigation={navigation}></ScanButton>
+        </View>
+        
+        
+       
+        <Scroller></Scroller>
+        {menuBar(navigation)}
       </View>
     );
 };

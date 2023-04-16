@@ -43,7 +43,7 @@ function ScanButton({ children, color, onPress, navigation }) {
             <View>
                 <Image 
                     style={styles.tinyLogo}
-                    source={require('../../assets/scan.png')}
+                    source={require('../../assets/scan-black.png')}
                 />
             </View>
         </Pressable>

@@ -1,6 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
+
+import { Font } from 'expo';
+
+// async function loadFonts() {
+//   await Font.loadAsync({
+//     'custom-font': require('/Users/conorcunningham/Downloads/pantri/assets/fonts/Poppins-ExtraBold.ttf'),
+//   });
+// }
+
+// loadFonts();
+
 const AppHeader = () => {
   return (
     <View style={styles.container}>
@@ -11,20 +22,21 @@ const AppHeader = () => {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'relative',
-    top: -30,
-    left: -80,
-    flexDirection: 'row',
-    alignItems: 'left',
-    paddingVertical: 10,
+    justifyContent: 'flex-start',
+    paddingTop: 40,
     paddingHorizontal: 10,
-
+    paddingBottom: 10,
+    flexDirection: 'row',
+    
   },
+
   title: {
+    flex: 1, 
     fontSize: 50,
-    color: '#087830',
-    fontFamily: 'Roboto',
-    fontWeight: '300',
+    color: '#000000',
+    fontWeight: '500',
+    // textDecorationLine: 'underline',
+    // textDecorationColor: '#32CD32',
   },
 });
 
