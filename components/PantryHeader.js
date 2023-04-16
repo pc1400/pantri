@@ -11,20 +11,21 @@ const AppHeader = () => {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'relative',
-    top: -275,
-    left: -80,
-    flexDirection: 'row',
-    alignItems: 'left',
+    // position: 'relative',
+    flex: 1,
+    marginTop: 50,
+    marginBottom: 50,
+    // top: 10,
+    // left: -80,
+    // flexDirection: 'row',
     paddingVertical: 10,
     paddingHorizontal: 10,
 
   },
   title: {
-    fontSize: 50,
-    color: '#087830',
-    fontFamily: 'Roboto',
-    fontWeight: '300',
+    fontSize: 40,
+    fontWeight: '500',
+    alignContent: 'center'
   },
 });
 

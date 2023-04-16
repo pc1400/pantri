@@ -3,12 +3,9 @@ import { Dimensions } from 'react-native'
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#ebebeb',
+      backgroundColor: '#ffffff',
       alignItems: 'center',
       justifyContent: 'center',
-      
-
-      
       //margin: 16,
     },
     
@@ -32,45 +29,28 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-start',
       height: Dimensions.get('window').height * .6,
       position: 'absolute',
-      bottom: 90
-      
+      bottom: 20
     },
     scrollitem:{
-      
       flexDirection: 'row',
-      width:Dimensions.get('window').width * .85,
+      width:Dimensions.get('window').width * .75,
       fontSize: 25,
       padding:7,
       margin:5,
-      backgroundColor: '#ffb265',
-      borderRadius: 15,
+      backgroundColor: '#ffffff',
+      borderRadius: 10,
+      shadowColor: '#171717',
+      shadowOffset: {width: 0, height: 0},
+      shadowOpacity: 0.4,
+      shadowRadius: 3,
     },
     scrolltext:{
       padding:7,
-      fontSize: 25,
-      
-    },
-    profilePic: {
-      width: 100,
-      height: 100,
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 10,
-      borderRadius: 50,
-      backgroundColor: 'gray',
-    },
-    settingsStyle: {
-      width: 300,
-      height: 50,
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 10,
-      borderRadius: 20,
-      backgroundColor: '#ffb265',
+      fontSize: 20,
     },
     containerProfile: {
       //flex: 2,
-      backgroundColor: '#ebebeb',
+      backgroundColor: '#ffffff',
       alignItems: 'center',
       fontSize: 20,
       fontWeight: "bold"
@@ -103,21 +83,22 @@ const styles = StyleSheet.create({
     },
     containerHorizontal: {
       flex: 1,
-      backgroundColor: '#ebebeb',
+      backgroundColor: '#ffffff',
       flexDirection: 'row',
       alignItems: 'center',
       position: 'absolute',
+      margin: 30,
       top: 80
       //justifyContent: 'center',
       //margin: 16,
     },
-    containerSearch:{
+  containerSearch: {
       margin: 10,
-      width: 270,
+      width:Dimensions.get('window').width * .75,
     },
     input: {
-      backgroundColor: '#ebebeb',
-      padding: 10,
+      backgroundColor: '#ffffff',
+      padding: 15,
       borderRadius: 10,
       color: "#000",
       borderWidth: 1,
@@ -130,13 +111,9 @@ const styles = StyleSheet.create({
       bottom : 0,
       height: 80,
       width:Dimensions.get('window').width,
-      backgroundColor: '#D3D3D3'
+      // backgroundColor: '#D3D3D3'
     },
     menubutton: {
-      
-      
-     
-     
       paddingHorizontal: 25,
       paddingVertical: 30,
       borderRadius:10,
@@ -162,11 +139,12 @@ const styles = StyleSheet.create({
       width: 30,
       height: 30,
       justifyContent: 'center',
+      
       alignItems: 'center',
     },
     containerSettings: {
       flex: 1,
-      backgroundColor: '#ebebeb',
+      backgroundColor: '#ffffff',
       alignItems: 'center',
       justifyContent: 'center',
       padding: 110,
@@ -193,8 +171,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'flex-start',
       height: Dimensions.get('window').height -20,
-      
-      
     },
     listscrollitem:{
       flex: 1,
@@ -202,7 +178,8 @@ const styles = StyleSheet.create({
       width:Dimensions.get('window').width * .85,
       fontSize: 25,
       padding:7,
-      margin:5,
+      margin: 5,
+      
       backgroundColor: '#ffb265',
       borderRadius: 15,
       justifyContent: 'flex-start',
@@ -215,12 +192,10 @@ const styles = StyleSheet.create({
   },
     containerMeals: {
       flex: 1,
-      backgroundColor: '#ebebeb',
+      backgroundColor: '#ffffff',
       alignItems: 'center',
       justifyContent: 'center',
       padding: 10,
-      
-      
       //margin: 16,
     },
     integratedstyling: {

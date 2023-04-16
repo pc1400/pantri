@@ -9,7 +9,7 @@ const PantrySearchBar = (props) => {
     return(
         <View style={styles.containerSearch}>
             <TextInput
-                placeholder='Enter'
+                placeholder='Add Item'
                 style={styles.input}
                 onChangeText={onChangeText}
                 value={text}
