@@ -13,9 +13,8 @@ const PantryScreen = ({ navigation }) => {
   const [searchText, setSearchText] = useState("");
   return (
       <View style={styles.container}>
-        <PantryHeader />
+        {/* <PantryHeader /> */}
         <View style={styles.containerHorizontal}>
- 
         <PantrySearchBar style={styles.searchBar} searchText={searchText} setSearchText={setSearchText}/>
         <ScanButton navigation={navigation}></ScanButton>
         </View>

@@ -12,8 +12,8 @@ const AppHeader = () => {
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
-    top: -275,
-    left: -80,
+    top: -260,
+    left: -90,
     flexDirection: 'row',
     alignItems: 'left',
     paddingVertical: 10,
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 50,
     color: '#087830',
-    fontFamily: 'Roboto',
     fontWeight: '300',
   },
 });

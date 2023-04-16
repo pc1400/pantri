@@ -43,7 +43,7 @@ function ScanButton({ children, color, onPress, navigation }) {
             <View>
                 <Image 
                     style={styles.tinyLogo}
-                    source={require('/Users/conorcunningham/Downloads/pantri/assets/scan.png')}
+                    source={require('/Users/conorcunningham/Downloads/pantri/assets/scan-black.png')}
                 />
             </View>
         </Pressable>

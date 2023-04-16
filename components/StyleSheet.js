@@ -3,9 +3,9 @@ import { Dimensions } from 'react-native'
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#ebebeb',
-      alignItems: 'center',
-      justifyContent: 'center',
+      backgroundColor: '#ffffff',
+      // alignItems: 'center',
+      // justifyContent: 'center',
       
 
       
@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
       width: 270,
     },
     input: {
+
       backgroundColor: '#ebebeb',
       padding: 10,
       borderRadius: 10,
@@ -128,15 +129,14 @@ const styles = StyleSheet.create({
       position: 'absolute',
       justifyContent: 'center',
       bottom : 0,
-      height: 80,
+      height: 60,
       width:Dimensions.get('window').width,
-      backgroundColor: '#D3D3D3'
+      // backgroundColor: '#F0F0F0',
+      borderTopWidth: 2,
+      borderColor: '#000000',
+    
     },
     menubutton: {
-      
-      
-     
-     
       paddingHorizontal: 25,
       paddingVertical: 30,
       borderRadius:10,
@@ -144,8 +144,8 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     tinyLogo: {
-      width: 45,
-      height: 45,
+      width: 40,
+      height: 40,
     },
     removebutton: {
       position: 'absolute',
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection: 'row',
       width:Dimensions.get('window').width,
-      borderRadius: 0,
+      padding: 10,
       alignItems: 'center',
       justifyContent: 'flex-start',
       height: Dimensions.get('window').height -20,
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
       fontSize: 25,
       padding:7,
       margin:5,
-      backgroundColor: '#ffb265',
+      backgroundColor: '#ffffff',
       borderRadius: 15,
       justifyContent: 'flex-start',
     },
@@ -215,9 +215,7 @@ const styles = StyleSheet.create({
   },
     containerMeals: {
       flex: 1,
-      backgroundColor: '#ebebeb',
-      alignItems: 'center',
-      justifyContent: 'center',
+      backgroundColor: '#ffffff',
       padding: 10,
       
       
@@ -225,9 +223,8 @@ const styles = StyleSheet.create({
     },
     integratedstyling: {
       //flex: 1,
-      backgroundColor:'#ffb265',
-      alignItems: 'center',
-      justifyContent: 'center',
+      backgroundColor:'#ffffff',
+      alignItems: 'left',
       padding: 10,
       borderRadius: 20,
     },
@@ -240,6 +237,30 @@ const styles = StyleSheet.create({
       fontSize: 25,
       borderRadius: 15,
       backgroundColor: '#ffb265',
+    },
+    saladButton: {
+      width:Dimensions.get('window').width,
+      height: 152,
+      fontSize: 25,
+      borderRadius: 0,
+      borderWidth: 1,
+      borderColor: '#E8E8E8',
+
+    },
+    menuImage: {
+      width: 150, 
+      height: 150, 
+    },
+    menuText: {
+      paddingTop: 5,
+      paddingBottom: 10,
+      fontSize: 20,
+      fontWeight: "bold",
+      flexWrap: 'wrap'
+    },
+    menuSubText: {
+      fontSize: 17,
+      flexWrap: 'wrap'
     },
   });
 
