@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
       bottom : 0,
       height: 60,
       width:Dimensions.get('window').width,
-      // backgroundColor: '#F0F0F0',
+      backgroundColor: '#F0F0F0',
       borderTopWidth: 2,
       borderColor: '#000000',
     
@@ -226,6 +226,7 @@ const styles = StyleSheet.create({
       borderRadius: 0,
       borderWidth: 1,
       borderColor: '#E8E8E8',
+      
 
     },
     menuImage: {

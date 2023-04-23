@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View, TouchableOpacity, Dimensions, TextInput, Modal, FlatList  } from 'react-native';
-import { menuBar} from "./menubar.js";
+import React, { useState, useEffect } from 'react';
+import { ScrollView, StyleSheet, Text, View, TouchableOpacity, Dimensions, TextInput, Modal, FlatList, Keyboard } from 'react-native';
+import { menuBar } from "./menubar.js";
+import { Ionicons } from '@expo/vector-icons';
 
-const units = ['c', 'tsp', 'tbsp', 'lbs', 'pt', 'qt', 'gal', 'oz', 'doz'];
+const units = ['c', 'tsp', 'tbsp', 'lbs', 'pt', 'qt', 'gal', 'oz', 'doz', 'x'];
 
-const IngredientItem = ({ ingredientName, unit }) => {
-  const [count, setCount] = useState(0);
+const IngredientItem = ({ ingredientName, unit, onCountZero }) => {
+  const [count, setCount] = useState(1);
 
   const increaseCount = () => setCount(count + 1);
-  const decreaseCount = () => setCount(count - 1);
+  const decreaseCount = () => {
+    setCount(count - 1);
+    if (count == 1) {
+      onCountZero(ingredientName);
+    }
+  }
 
   return (
     <View style={styles.ingredientItem}>
@@ -17,9 +23,15 @@ const IngredientItem = ({ ingredientName, unit }) => {
         <Text style={styles.amountText}>{count + " " + unit}</Text>
       </View>
       <View style={styles.countContainer}>
-        <TouchableOpacity style={styles.button} onPress={decreaseCount}>
-          <Text style={styles.buttonText}>-</Text>
-        </TouchableOpacity>
+        {count == 1 ?
+          <TouchableOpacity style={styles.trashButton} onPress={() => onCountZero(ingredientName)}>
+            <Ionicons name="trash" size={16} color="white" />
+          </TouchableOpacity>
+          :
+          <TouchableOpacity style={styles.button} onPress={decreaseCount}>
+            <Text style={styles.buttonText}>-</Text>
+          </TouchableOpacity>
+        }
         {/* <Text style={styles.countText}>{count}</Text> */}
         <TouchableOpacity style={styles.button} onPress={increaseCount}>
           <Text style={styles.buttonText}>+</Text>
@@ -29,18 +41,11 @@ const IngredientItem = ({ ingredientName, unit }) => {
   );
 };
 
-export default function App({ navigation }) {
-  const [newIngredient, setNewIngredient] = useState({ ingredientName: '', unit: 'c' });
-  const [ingredientList, setIngredientList] = useState([
-    { ingredientName: 'Flour', unit: 'cup(s)' },
-    { ingredientName: 'Sugar', unit: 'cup(s)' },
-    { ingredientName: 'Eggs', unit: '' },
-    { ingredientName: 'Milk', unit: 'gallon(s)' },
-    { ingredientName: 'Butter', unit: 'stick(s)' },
-    { ingredientName: 'Vanilla extract', unit: 'teaspoon(s)' },
-  ]);
-
-  const [selectedOption, setSelectedOption] = useState('c');
+export default function App({ navigation, route }) {
+  const [newIngredient, setNewIngredient] = useState({ ingredientName: '', unit: '' });
+  const [ingredientList, setIngredientList] = useState(route.params.ingredientList);
+  
+  const [selectedOption, setSelectedOption] = useState();
   const [modalVisible, setModalVisible] = useState(false);
 
   const renderItem = ({ item }) => (
@@ -58,57 +63,110 @@ export default function App({ navigation }) {
     setNewIngredient({ ...newIngredient, [key]: value });
   };
 
-  const handleAddIngredient = () => {
-    setIngredientList([...ingredientList, { ...newIngredient }]);
-    setNewIngredient({ ingredientName: '', unit: '' });
+  const handleAddIngredient = async () => {
+    Keyboard.dismiss();
+    try {
+    const response = await fetch('http://192.168.1.93:3000/pantry', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ingredient: newIngredient.ingredientName,
+        unit: newIngredient.unit
+      })
+    });
+      const data = await response.json();
+      const dataList = data.split('"');
+      const ingredientName = dataList[3];
+      const unit = dataList[7];
+      const ingredient = { ingredientName: ingredientName, unit: unit };
+
+      setIngredientList([...ingredientList, ingredient]);
+      setNewIngredient({ ingredientName: '', unit: '' });
+      setSelectedOption(null);
+    } catch (error) {
+      console.error('Error adding ingredient:', error);
+    }
+  };
+
+  const handleRemoveIngredient = async (removeIngredient) => {
+    console.log(removeIngredient);
+    const updatedList = ingredientList.filter(ingredient => {
+      console.log(removeIngredient)
+      return ingredient.ingredientName !== removeIngredient;
+    });
+    setIngredientList(updatedList);
+    try {
+    const response = await fetch('http://192.168.1.93:3000/deleteIngredient', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ingredient: removeIngredient
+      })
+    });
+    
+    } catch (error) {
+      console.error('Error deleting ingredient:', error);
+    }
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Pantry</Text>
+      
       <View style={styles.searchContainer}>
         <TextInput
-          style={styles.input}
+          style={styles.textInput}
           placeholder="Add ingredient"
           value={newIngredient.ingredientName}
           onChangeText={(text) => handleInputChange('ingredientName', text)}
+          onSubmitEditing={handleAddIngredient}
         />
-        {/* <TextInput
-          style={styles.input}
-          placeholder="Amount"
-          value={newIngredient.unit}
-          onChangeText={(text) => handleInputChange('amount', text)}
-        /> */}
-
-      <View style={styles.input}>
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <Text>{selectedOption}</Text>
-        </TouchableOpacity>
-        <Modal visible={modalVisible} animationType="slide">
-          <FlatList
-            data={units}
-            renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => {onSelect(item); setModalVisible(false)}}>
-                <Text>{item}</Text>
-              </TouchableOpacity>
-            )}
-          />
-        </Modal>
-      </View>
-
+        <View style={styles.input}>
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <Text numberOfLines={1} style={[styles.selectedOption, !selectedOption && styles.redText]} >
+              {selectedOption || "..."}
+            </Text>
+          </TouchableOpacity>
+          <Modal visible={modalVisible} animationType="slide" transparent={true}>
+            <TouchableOpacity style={styles.modalBackdrop} onPress={() => setModalVisible(false)}>
+              <View style={styles.modalContainer}>
+                <FlatList 
+                  data={units} 
+                  renderItem={({ item }) => (
+                    <TouchableOpacity
+                      onPress={() => {
+                        onSelect(item);
+                        setModalVisible(false);
+                      }}
+                      style={styles.modalItem}>
+                      <Text style={styles.modalItemText}>{item}</Text>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            </TouchableOpacity>
+          </Modal>
+        </View>
         <TouchableOpacity style={styles.addButton} onPress={handleAddIngredient}>
           <Text style={styles.buttonText}>Add</Text>
         </TouchableOpacity>
       </View>
 
-      <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, maxHeight: 4 * 70, width: '100%' }} horizontal={false}>
-        <View style={styles.ingredientList}>
-          {ingredientList.map((ingredient, index) => (
-            <IngredientItem key={index} ingredientName={ingredient.ingredientName} unit={ingredient.unit} />
-          ))}
-        </View>
-      </ScrollView>
-      {menuBar(navigation)}
+      <FlatList
+        data={ingredientList}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <IngredientItem ingredientName={item.ingredientName} unit={item.unit} onCountZero={() => handleRemoveIngredient(item.ingredientName)} />
+        )}
+        showsVerticalScrollIndicator={false}
+        style={{ flex: 1, maxHeight: 4 * 67.57, width: '100%' }}
+      />
+
+      {menuBar({ navigation })}
     </View>
   );
 }
@@ -171,53 +229,83 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'left',
   },
+  trashButton: {
+    backgroundColor: '#32CD32',
+    borderRadius: 5,
+    marginHorizontal: 5,
+    height: '80%',
+    width: '22%',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   button: {
     backgroundColor: '#32CD32',
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 5,
     marginHorizontal: 5,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  input: {
-  height: 40,
-  width: Dimensions.get('window').width * 0.2,
-  borderWidth: 1,
-  borderRadius: 10,
-  paddingHorizontal: 10,
-  paddingVertical: 5,
-  margin: 5,
+    height: '80%',
+    width: '22%',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   addButton: {
-  backgroundColor: '#32CD32',
-  paddingHorizontal: 10,
-  paddingVertical: 5,
-  borderRadius: 5,
-  margin: 5,
+    backgroundColor: '#32CD32',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
   },
   buttonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     textAlign: 'center',
+  },
+  textInput: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#ccc',
+    marginBottom: 10,
+    width: '65%'
+  },
+  input: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#ccc',
+    marginBottom: 10,
+    width: '14%'
   },
   searchContainer: {
     flexDirection: 'row',
     marginBottom: 20
   },
-  modalOverlay: {
+  modalBackdrop: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  modalContent: {
-    backgroundColor: 'white',
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    maxHeight: 200,
+  modalContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    padding: 10,
+    width: '80%',
   },
+  modalItem: {
+    padding: 10,
+  },
+  modalItemText: {
+    fontSize: 16,
+  },
+  redText: {
+    color: "#ccc",
+  }
 });

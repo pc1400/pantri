@@ -26,9 +26,9 @@ function CreamyChickenButton({children, onPress}) {
 
 const s = StyleSheet.create({
     container: {
-    //   flex: 1,
-      justifyContent: 'space-between',
-      flexDirection:'row',
+        //   flex: 1,
+        justifyContent: 'space-between',
+        flexDirection: 'row',
     }
 });
 
