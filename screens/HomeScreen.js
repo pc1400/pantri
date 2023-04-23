@@ -6,12 +6,13 @@ import AppHeader from "../components/AppHeader.js";
 import FeaturedMealsOverviewScreen from "../screens/mainRecipes.js";
 import { useFocusEffect } from '@react-navigation/native';
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation, route }) => {
+  const id = route.params.id;
   return (
     <View style={styles.container}>
       <AppHeader />
-      {FeaturedMealsOverviewScreen(navigation)}
-      {menuBar({ navigation })}
+      {FeaturedMealsOverviewScreen({ navigation, id })}
+      {menuBar({ navigation, id })}
     </View>
   );
 };

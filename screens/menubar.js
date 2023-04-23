@@ -1,5 +1,5 @@
 
-import {  View, Text, Image, Pressable} from 'react-native';
+import {  View, Text, Image, Pressable, RootTagContext} from 'react-native';
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
@@ -8,8 +8,11 @@ import ScanButton from "../components/PantryPageComponents/ScanButton.js";
 import { useFocusEffect } from '@react-navigation/native';
 
 
-const menuBar = ({ navigation, route }) => {
-  const [ingredientList, setIngredientList] = useState(route);
+const menuBar = ({ navigation, id }) => {
+  // const id = route.params.id;
+  const test = id;
+  console.log(id);
+  const [ingredientList, setIngredientList] = useState([]);
 
   // useEffect(() => {
   //   console.log('hello');
@@ -24,7 +27,7 @@ const menuBar = ({ navigation, route }) => {
   useFocusEffect(
     React.useCallback(() => {
       const fetchData = async () => {
-        fetch('http://192.168.1.93:3000/pantry')
+        fetch(`http://192.168.1.93:3000/pantry/${id}`)
           .then(response => response.json())
           .then(data => {
             const parsedData = JSON.parse(data);
@@ -46,7 +49,7 @@ const menuBar = ({ navigation, route }) => {
     <View style={styles.menu}>
       <Pressable style={styles.menubutton}
         onPress={() =>
-          navigation.navigate('Home')
+          navigation.navigate('Home', { id })
         }
         >
         <Image
@@ -60,7 +63,7 @@ const menuBar = ({ navigation, route }) => {
       <ScanButton navigation={navigation}></ScanButton>
       <Pressable style={styles.menubutton}
         onPress={() =>
-          navigation.navigate('Pantry', { ingredientList })
+          navigation.navigate('Pantry', { ingredientList, id })
         }
       ><Image
       style={styles.tinyLogo}

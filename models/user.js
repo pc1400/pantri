@@ -4,20 +4,24 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   title: {
     type: String,
+    default: ""
+  },
+  username: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
     required: true
   },
   ingredients: {
     type: Array,
-    required: true
+    default: []
   },
   recipes: {
     type: Array,
-    required: true
-  },
-  groceries: {
-    type: Array,
-    required: true
-  },
+    default: []
+  }
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

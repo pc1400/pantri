@@ -44,6 +44,7 @@ const IngredientItem = ({ ingredientName, unit, onCountZero }) => {
 export default function App({ navigation, route }) {
   const [newIngredient, setNewIngredient] = useState({ ingredientName: '', unit: '' });
   const [ingredientList, setIngredientList] = useState(route.params.ingredientList);
+  const id = route.params.id; 
   
   const [selectedOption, setSelectedOption] = useState();
   const [modalVisible, setModalVisible] = useState(false);
@@ -66,14 +67,15 @@ export default function App({ navigation, route }) {
   const handleAddIngredient = async () => {
     Keyboard.dismiss();
     try {
-    const response = await fetch('http://192.168.1.93:3000/pantry', {
+    const response = await fetch(`http://192.168.1.93:3000/pantry/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         ingredient: newIngredient.ingredientName,
-        unit: newIngredient.unit
+        unit: newIngredient.unit,
+        id: id
       })
     });
       const data = await response.json();
@@ -98,13 +100,15 @@ export default function App({ navigation, route }) {
     });
     setIngredientList(updatedList);
     try {
-    const response = await fetch('http://192.168.1.93:3000/deleteIngredient', {
+      
+    const response = await fetch(`http://192.168.1.93:3000/deleteIngredient/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        ingredient: removeIngredient
+        ingredient: removeIngredient,
+        id: id
       })
     });
     
@@ -168,7 +172,7 @@ export default function App({ navigation, route }) {
         style={{ flex: 1, maxHeight: 4 * 67.57, width: '100%' }}
       />
 
-      {menuBar({ navigation })}
+      {menuBar({ navigation, id })}
     </View>
   );
 }
