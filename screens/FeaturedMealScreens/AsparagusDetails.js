@@ -29,7 +29,7 @@ const AsparagusDetailScreen = ({ navigation }) => {
       'Mix with asparagus, salad and dressing',
       'Serve with Baguette'</Text>
       </View>
-      {menuBar(navigation)}
+      {menuBar({ navigation })}
     </View>
     );
 }

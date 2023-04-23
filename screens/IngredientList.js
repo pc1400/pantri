@@ -156,6 +156,8 @@ export default function App({ navigation, route }) {
         </TouchableOpacity>
       </View>
 
+
+
       <FlatList
         data={ingredientList}
         keyExtractor={(item, index) => index.toString()}
@@ -233,8 +235,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#32CD32',
     borderRadius: 5,
     marginHorizontal: 5,
-    height: '80%',
-    width: '22%',
+    height: 30,
+    width: 30,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -244,8 +246,8 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 5,
     marginHorizontal: 5,
-    height: '80%',
-    width: '22%',
+    height: 30,
+    width: 30,
     alignItems: 'center',
     justifyContent: 'center'
   },

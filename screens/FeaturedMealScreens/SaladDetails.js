@@ -2,6 +2,7 @@ import { useRoute, ScrollView } from '@react-navigation/native';
 import { View, Text, StyleSheet } from 'react-native'
 import { styles } from '../../components/StyleSheet';
 import { menuBar } from '../menubar';
+
 const SaladDetailScreen = ({ navigation }) => {
     const route  = useRoute();
 
@@ -43,7 +44,7 @@ const SaladDetailScreen = ({ navigation }) => {
             <Text>{index + 1}.  {s}</Text>
           ))}
       </View>
-      {menuBar(navigation)}
+      {menuBar({ navigation })}
     </View>
     );
 }

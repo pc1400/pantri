@@ -30,7 +30,7 @@ const CreamyIndianDetailScreen = ({ navigation }) => {
       'Add coconut milk',
       'Serve with rice'</Text>
       </View>
-      {menuBar(navigation)}
+      {menuBar({ navigation })}
     </View>
     );
 }
