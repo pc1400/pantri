@@ -4,7 +4,7 @@ import CreamyChickenButton from '../components/FeaturedMealButtons/CreamyIndian'
 import SaladButton from '../components/FeaturedMealButtons/Salad';
 import { menuBar } from './menubar';
 
-const FeaturedMealsOverviewScreen = navigation => {
+const FeaturedMealsOverviewScreen = ({navigation, id}) => {
     return (
         <View style = {styles.listscrollview}> 
           <ScrollView> 

@@ -23,46 +23,14 @@ const App = () => {
   return (
     <NavigationContainer >
       <Stack.Navigator>
-        <Stack.Screen
-          options={{ headerShown: false, animation: 'fade' }}
-          name="Login"
-          component={LoginScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false, animation: 'fade' }}
-          name="SignUp"
-          component={SignUpScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false, animation: 'fade' }}
-          name="Home"
-          component={HomeScreen}
-        />
-        <Stack.Screen
-          options={{ headerShown: false, animation: 'fade' }}
-          name="Pantry"
-          component={IngredientList}
-        />
-        <Stack.Screen
-          options={{ animation: 'fade' }}
-          name="Pancakes"
-          component={PancakesDetailScreen}
-        />
-        <Stack.Screen
-          options={{ animation: 'fade' }}
-          name="Salad with Smoked Salmon"
-          component={SaladDetailScreen}
-        />
-        <Stack.Screen
-          options={{ animation: 'fade' }}
-          name="Creamy Indian Chicken Curry"
-          component={CreamyIndianDetailScreen}
-        />
-        <Stack.Screen
-          options={{ animation: 'fade' }}
-          name="Asparagus Salad with Cherry Tomatoes"
-          component={AsparagusDetailScreen}
-        />
+        <Stack.Screen options={{ headerShown: false, animation: 'fade' }} name="Login" component={LoginScreen}/>
+        <Stack.Screen options={{ headerShown: false, animation: 'fade' }} name="SignUp" component={SignUpScreen}/>
+        <Stack.Screen options={{ headerShown: false, animation: 'fade' }} name="Home" component={HomeScreen} />
+        <Stack.Screen options={{ headerShown: false, animation: 'fade' }} name="Pantry" component={IngredientList} />
+        <Stack.Screen options={{ animation: 'fade' }} name="Pancakes" component={PancakesDetailScreen} />
+        <Stack.Screen options={{ animation: 'fade' }} name="Salad with Smoked Salmon" component={SaladDetailScreen}/>
+        <Stack.Screen options={{ animation: 'fade' }} name="Creamy Indian Chicken Curry" component={CreamyIndianDetailScreen}/>
+        <Stack.Screen options={{ animation: 'fade' }} name="Asparagus Salad with Cherry Tomatoes" component={AsparagusDetailScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

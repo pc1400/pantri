@@ -2,9 +2,10 @@ import { useRoute } from '@react-navigation/native';
 import { View, Text, StyleSheet } from 'react-native'
 import { styles } from '../../components/StyleSheet';
 import { menuBar } from '../menubar';
-const AsparagusDetailScreen = ({ navigation }) => {
-    const route  = useRoute();
-    return (
+const AsparagusDetailScreen = ({ navigation, id }) => {
+  console.log(id);
+  const route  = useRoute();
+  return (
     <View style={styles.containerMeals}>
       <View style={styles.integratedstyling}>
         <Text style = {{fontWeight: "bold"}}> Name: </Text>
@@ -31,6 +32,6 @@ const AsparagusDetailScreen = ({ navigation }) => {
       </View>
       {menuBar({ navigation })}
     </View>
-    );
+  );
 }
 export default AsparagusDetailScreen;

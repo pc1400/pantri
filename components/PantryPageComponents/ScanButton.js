@@ -8,7 +8,7 @@ import * as Permissions from 'expo-permissions'
 import { styles } from "../StyleSheet.js";
 import * as ImageManipulator from 'expo-image-manipulator';
 
-function ScanButton({ children, color, onPress, navigation }) {
+function ScanButton({ children, color, onPress, navigation, ingredientList, id }) {
 
     takeImage = async () => {
     // launch the camera with the following settings
@@ -21,20 +21,23 @@ function ScanButton({ children, color, onPress, navigation }) {
         })
         // make sure a image was taken:
         if (!image.canceled) {
-
-            fetch('https://pantri-server.herokuapp.com/scan', {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                // send our base64 string as POST request
-                body: JSON.stringify({
-                    imgsource: image.base64,
-                }),
-            })
+            console.log("OK");
+            navigation.navigate('Pantry', { ingredientList, id });
+            // fetch('https://pantri-server.herokuapp.com/scan', {
+            //     method: 'POST',
+            //     headers: {
+            //         Accept: 'application/json',
+            //         'Content-Type': 'application/json',
+            //     },
+            //     // send our base64 string as POST request
+            //     body: JSON.stringify({
+            //         imgsource: image.base64,
+            //     }),
+            // })
+            
+        } else {
+            navigation.navigate('Home', { id })
         }
-        navigation.navigate('Pantry')
     }
     
     return (

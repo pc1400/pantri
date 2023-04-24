@@ -11,7 +11,6 @@ import { useFocusEffect } from '@react-navigation/native';
 const menuBar = ({ navigation, id }) => {
   // const id = route.params.id;
   const test = id;
-  console.log(id);
   const [ingredientList, setIngredientList] = useState([]);
 
   // useEffect(() => {
@@ -60,7 +59,7 @@ const menuBar = ({ navigation, id }) => {
           }
         />
         </Pressable>
-      <ScanButton navigation={navigation}></ScanButton>
+      <ScanButton navigation={navigation} ingredientList={ingredientList} id={id}></ScanButton>
       <Pressable style={styles.menubutton}
         onPress={() =>
           navigation.navigate('Pantry', { ingredientList, id })
