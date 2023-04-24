@@ -3,8 +3,8 @@ import { View, Text, StyleSheet } from 'react-native'
 import { styles } from '../../components/StyleSheet';
 import { menuBar } from '../menubar';
 const AsparagusDetailScreen = ({ navigation, id }) => {
-  console.log(id);
-  const route  = useRoute();
+  const route = useRoute();
+  const actualID = route.params.id;
   return (
     <View style={styles.containerMeals}>
       <View style={styles.integratedstyling}>

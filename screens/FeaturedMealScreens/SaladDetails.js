@@ -3,8 +3,10 @@ import { View, Text, StyleSheet } from 'react-native'
 import { styles } from '../../components/StyleSheet';
 import { menuBar } from '../menubar';
 
-const SaladDetailScreen = ({ navigation }) => {
-    const route  = useRoute();
+const SaladDetailScreen = ({ navigation, id }) => {
+    
+  const route = useRoute();
+  const actualID = route.params.id;
 
     const ingredients = [
       'Arugula',
@@ -44,7 +46,7 @@ const SaladDetailScreen = ({ navigation }) => {
             <Text>{index + 1}.  {s}</Text>
           ))}
       </View>
-      {menuBar({ navigation })}
+      {menuBar({ navigation, id })}
     </View>
     );
 }

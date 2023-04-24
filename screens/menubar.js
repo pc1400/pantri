@@ -10,7 +10,9 @@ import { useFocusEffect } from '@react-navigation/native';
 
 const menuBar = ({ navigation, id }) => {
   // const id = route.params.id;
-  const test = id;
+  if (!id) {
+    id = "6444b1de1617602408f8a412";
+  }
   const [ingredientList, setIngredientList] = useState([]);
 
   // useEffect(() => {

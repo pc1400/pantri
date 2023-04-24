@@ -2,8 +2,9 @@ import { useRoute } from '@react-navigation/native';
 import { View, Text, StyleSheet } from 'react-native'
 import { styles } from '../../components/StyleSheet';
 import { menuBar } from '../menubar';
-const CreamyIndianDetailScreen = ({ navigation }) => {
-    const route  = useRoute();
+const CreamyIndianDetailScreen = ({ navigation, id}) => {
+  const route = useRoute();
+  const actualID = route.params.id;
     return (
     <View style={styles.containerMeals}>
       <View style={styles.integratedstyling}>
