@@ -9,35 +9,37 @@ import { useFocusEffect } from '@react-navigation/native';
 
 
 const menuBar = ({ navigation, id }) => {
-  // const id = route.params.id;
+
   if (!id) {
     id = "6444b1de1617602408f8a412";
   }
-  const [ingredientList, setIngredientList] = useState([]);
+// pantri-server.herokuapp.com/pantry/6444b1de1617602408f8a412
 
-  // useEffect(() => {
-  //   console.log('hello');
-  //   fetch('http://192.168.1.93:3000/pantry')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       const parsedData = JSON.parse(data);
-  //       setIngredientList(parsedData);
-  //     }).catch(error => console.error(error));
-  // }, []);
+  const [ingredientList, setIngredientList] = useState([]);
+  const [recipeList, setRecipeList] = useState([]);
 
   useFocusEffect(
     React.useCallback(() => {
       const fetchData = async () => {
-        fetch(`http://192.168.1.93:3000/pantry/${id}`)
-          .then(response => response.json())
-          .then(data => {
-            const parsedData = JSON.parse(data);
-            setIngredientList(parsedData);
-          }).catch(error => console.error(error));
+        try {
+          const [data1, data2] = await Promise.all([
+            fetch(`https://pantri-server.herokuapp.com/pantry/${id}`),
+            fetch(`https://pantri-server.herokuapp.com/testRecipes/${id}`)
+          ]);
+          const result1 = await data1.json();
+          const result2 = await data2.json();
+
+          const parsedData = JSON.parse(result1);
+          setIngredientList(parsedData);
+          setRecipeList(result2);      
+        } catch (error) {
+          console.log(error);
+        }
       };
       fetchData();
     }, [])
   );  
+
   const newRoute = useRoute();
   const isHomeScreen = newRoute.name === 'Home'
     || newRoute.name === 'Salad with Smoked Salmon'
@@ -50,7 +52,7 @@ const menuBar = ({ navigation, id }) => {
     <View style={styles.menu}>
       <Pressable style={styles.menubutton}
         onPress={() =>
-          navigation.navigate('Home', { id })
+          navigation.navigate('Home', { id: id, recipeList: recipeList })
         }
         >
         <Image

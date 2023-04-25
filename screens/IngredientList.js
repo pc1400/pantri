@@ -169,7 +169,7 @@ export default function App({ navigation, route }) {
           <IngredientItem ingredientName={item.ingredientName} unit={item.unit} onCountZero={() => handleRemoveIngredient(item.ingredientName)} />
         )}
         showsVerticalScrollIndicator={false}
-        style={{ flex: 1, maxHeight: 4 * 67.57, width: '100%' }}
+        style={{ flex: 1, maxHeight: 4 * 70, width: '100%' }}
       />
 
       {menuBar({ navigation, id })}

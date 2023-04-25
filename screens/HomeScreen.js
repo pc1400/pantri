@@ -7,14 +7,13 @@ import FeaturedMealsOverviewScreen from "../screens/mainRecipes.js";
 import { useFocusEffect } from '@react-navigation/native';
 
 const HomeScreen = ({ navigation, route }) => {
-  var id = route.params.id;
-  if (!id) {
-    id = "6444b1de1617602408f8a412";
-  }
+  const id = route.params.id;
+  const recipeList = route.params.recipeList;
+  
   return (
     <View style={styles.container}>
       <AppHeader />
-      {FeaturedMealsOverviewScreen({ navigation, id })}
+      <FeaturedMealsOverviewScreen navigation={navigation} id={id} recipeList={recipeList} />
       {menuBar({ navigation, id })}
     </View>
   );

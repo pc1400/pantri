@@ -8,7 +8,7 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
-      fetch('http://192.168.1.93:3000/login', {
+      fetch('https://pantri-server.herokuapp.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -27,7 +27,11 @@ const LoginScreen = ({ navigation }) => {
         })
         .then(data => {
           const id = data;
-          navigation.navigate('Home', {id});
+          fetch(`https://pantri-server.herokuapp.com/testRecipes/${id}`)
+          .then(response => response.json())
+            .then(recipes => {
+              navigation.navigate('Home', { id: id, recipeList: recipes });
+          }).catch(error => console.error(error));
         })
         .catch(error => {
           console.error('There was a problem with the API call:', error);
