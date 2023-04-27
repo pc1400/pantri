@@ -6,7 +6,7 @@ const RecipeButton = ({ recipe, navigation, id }) => {
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(recipe.title, { id: id })}
+      onPress={() => navigation.navigate('Recipe Details', { id: id, recipe: recipe })}
       style={styles.recipeButton}
     >
       <Image source={{ uri: recipe.image }} style={styles.image} />

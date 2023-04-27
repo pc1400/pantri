@@ -17,11 +17,9 @@ const FeaturedMealsOverviewScreen = ({ navigation, id, recipeList }) => {
         </View>
       );
     } else {
-      return null; // if the recipe doesn't have matching ingredients, don't render the button
+      return null;
     }
   });
-
-  console.log(recipeButtons);
 
   return (
     <View style={styles.listscrollview}>

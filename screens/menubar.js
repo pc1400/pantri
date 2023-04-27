@@ -13,8 +13,6 @@ const menuBar = ({ navigation, id }) => {
   if (!id) {
     id = "6444b1de1617602408f8a412";
   }
-// pantri-server.herokuapp.com/pantry/6444b1de1617602408f8a412
-
   const [ingredientList, setIngredientList] = useState([]);
   const [recipeList, setRecipeList] = useState([]);
 
@@ -23,8 +21,11 @@ const menuBar = ({ navigation, id }) => {
       const fetchData = async () => {
         try {
           const [data1, data2] = await Promise.all([
-            fetch(`https://pantri-server.herokuapp.com/pantry/${id}`),
-            fetch(`https://pantri-server.herokuapp.com/testRecipes/${id}`)
+            // fetch(`https://pantri-server.herokuapp.com/pantry/${id}`),
+            // fetch(`https://pantri-server.herokuapp.com/testRecipes/${id}`)
+            fetch(`http://192.168.1.93:3000/pantry/${id}`),
+            fetch(`http://192.168.1.93:3000/testRecipes/${id}`)
+            
           ]);
           const result1 = await data1.json();
           const result2 = await data2.json();
@@ -66,7 +67,7 @@ const menuBar = ({ navigation, id }) => {
       <ScanButton navigation={navigation} ingredientList={ingredientList} id={id}></ScanButton>
       <Pressable style={styles.menubutton}
         onPress={() =>
-          navigation.navigate('Pantry', { ingredientList, id })
+          navigation.navigate('Pantry', { ingredientList, id, recipeList })
         }
       ><Image
       style={styles.tinyLogo}

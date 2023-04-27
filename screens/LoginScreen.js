@@ -8,7 +8,7 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
-      fetch('https://pantri-server.herokuapp.com/login', {
+      fetch('http://192.168.1.93:3000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ const LoginScreen = ({ navigation }) => {
         })
         .then(data => {
           const id = data;
-          fetch(`https://pantri-server.herokuapp.com/testRecipes/${id}`)
+          fetch(`http://192.168.1.93:3000/testRecipes/${id}`)
           .then(response => response.json())
             .then(recipes => {
               navigation.navigate('Home', { id: id, recipeList: recipes });
