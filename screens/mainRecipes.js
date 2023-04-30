@@ -5,42 +5,32 @@ import SaladButton from '../components/FeaturedMealButtons/Salad';
 import RecipeButton from '../components/FeaturedMealButtons/RecipeButton';
 import { menuBar } from './menubar';
 import { useFocusEffect } from '@react-navigation/native';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 
-const FeaturedMealsOverviewScreen = ({ navigation, id, recipeList }) => {
+const FeaturedMealsOverviewScreen = ({ navigation, id, recipeList, fetchRecipes }) => {
+  const [filteredRecipeList, setFilteredRecipeList] = useState([]);
 
-  const recipeButtons = recipeList.map(recipe => {
-  const hasMatchingIngredients = recipe.matchingIngredients.length > 0;
-    if (hasMatchingIngredients) {
-      return (
-        <View style={styles.buttonContainer}>
-          <RecipeButton recipe={recipe} navigation={navigation} id={id} key={recipe.id} />
-        </View>
-      );
-    } else {
-      return null;
-    }
-  });
+  useEffect(() => {
+    const filteredList = recipeList.filter(recipe => recipe.matchingIngredients.length > 0);
+    setFilteredRecipeList(filteredList);
+  }, [recipeList]);
+  const recipeButtons = filteredRecipeList.map(recipe => (
+    <View style={styles.buttonContainer}>
+      <RecipeButton recipe={recipe} navigation={navigation} id={id} key={recipe.id} fetchRecipes={fetchRecipes} />
+    </View>
+  ));
 
   return (
     <View style={styles.listscrollview}>
       <ScrollView>
         {recipeButtons}
-        {/* <SaladButton onPress={() => {
-          console.log(id);
-          navigation.navigate('Salad with Smoked Salmon', {navigation, id})} 
-        }/>
-        <View style={{ height: 5 }} />
-        <CreamyChickenButton onPress={() =>
-          navigation.navigate("Creamy Indian Chicken Curry", { id })} />
-        <View style={{ height: 5 }} />
-        <AsparagusSaladButton onPress={() =>
-          navigation.navigate("Asparagus Salad with Cherry Tomatoes", { id })} /> */}
       </ScrollView>
     </View>
     );
 }
 
 export default FeaturedMealsOverviewScreen
+
 const styles = StyleSheet.create({
   FeaturedContainer: {
     flex: 1,
@@ -59,6 +49,7 @@ const styles = StyleSheet.create({
     margin: 0,
   },
 });
+
 const value =  navigation  => {
     return (
       <View>
@@ -70,6 +61,6 @@ const value =  navigation  => {
         />
       </View>
     );
-  };
+};
 
-  export {value};
+export {value};

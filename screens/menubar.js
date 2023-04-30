@@ -8,31 +8,21 @@ import ScanButton from "../components/PantryPageComponents/ScanButton.js";
 import { useFocusEffect } from '@react-navigation/native';
 
 
-const menuBar = ({ navigation, id }) => {
-
+const MenuBar = ({ navigation, id, fetchRecipes, staticIngredientList }) => {
   if (!id) {
     id = "6444b1de1617602408f8a412";
   }
+  const test = staticIngredientList ? staticIngredientList : [];
   const [ingredientList, setIngredientList] = useState([]);
-  const [recipeList, setRecipeList] = useState([]);
 
   useFocusEffect(
     React.useCallback(() => {
       const fetchData = async () => {
         try {
-          const [data1, data2] = await Promise.all([
-            // fetch(`https://pantri-server.herokuapp.com/pantry/${id}`),
-            // fetch(`https://pantri-server.herokuapp.com/testRecipes/${id}`)
-            fetch(`http://192.168.1.93:3000/pantry/${id}`),
-            fetch(`http://192.168.1.93:3000/testRecipes/${id}`)
-            
-          ]);
-          const result1 = await data1.json();
-          const result2 = await data2.json();
-
-          const parsedData = JSON.parse(result1);
+          const data = await fetch(`http://192.168.1.93:3000/pantry/${id}`);
+          const result = await data.json();
+          const parsedData = JSON.parse(result);
           setIngredientList(parsedData);
-          setRecipeList(result2);      
         } catch (error) {
           console.log(error);
         }
@@ -53,7 +43,7 @@ const menuBar = ({ navigation, id }) => {
     <View style={styles.menu}>
       <Pressable style={styles.menubutton}
         onPress={() =>
-          navigation.navigate('Home', { id: id, recipeList: recipeList })
+          navigation.navigate('Home', { id, ingredientList: test })
         }
         >
         <Image
@@ -67,7 +57,7 @@ const menuBar = ({ navigation, id }) => {
       <ScanButton navigation={navigation} ingredientList={ingredientList} id={id}></ScanButton>
       <Pressable style={styles.menubutton}
         onPress={() =>
-          navigation.navigate('Pantry', { ingredientList, id, recipeList })
+          navigation.navigate('Pantry', { ingredientList, id, fetchRecipes })
         }
       ><Image
       style={styles.tinyLogo}
@@ -82,4 +72,4 @@ const menuBar = ({ navigation, id }) => {
   ;
 };
 
-export {menuBar};
+export default MenuBar;

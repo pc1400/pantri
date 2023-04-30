@@ -1,11 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import { menuBar } from '../screens/menubar';
+import MenuBar from '../screens/menubar';
 
-const RecipeDetails = ({ navigation, id, recipe }) => {
+const RecipeDetails = ({ navigation, id, recipe, fetchRecipes }) => {
   // const steps = recipe.steps.split(".");
-  console.log()
 
   return (
     <View style={styles.container}>
@@ -35,9 +34,8 @@ const RecipeDetails = ({ navigation, id, recipe }) => {
           ))}
         </View>
         </View>
-        </ScrollView>
-        {menuBar({ navigation, id })}
-        
+      </ScrollView>
+      <MenuBar navigation={navigation} id={id} fetchRecipes={fetchRecipes} />
     </View>
   );
 };

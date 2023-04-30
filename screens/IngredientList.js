@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Text, View, TouchableOpacity, Dimensions, TextInput, Modal, FlatList, Keyboard } from 'react-native';
-import { menuBar } from "./menubar.js";
+import MenuBar from "./menubar.js";
 import { Ionicons } from '@expo/vector-icons';
+import { debounce } from 'lodash';
 
 const units = ['c', 'tsp', 'tbsp', 'lbs', 'pt', 'qt', 'gal', 'oz', 'doz', 'x'];
 
@@ -42,13 +43,15 @@ const IngredientItem = ({ ingredientName, unit, onCountZero }) => {
 };
 
 export default function App({ navigation, route }) {
+  const id = route.params.id; 
+
   const [newIngredient, setNewIngredient] = useState({ ingredientName: '', unit: '' });
   const [ingredientList, setIngredientList] = useState(route.params.ingredientList);
-  const id = route.params.id; 
-  
   const [selectedOption, setSelectedOption] = useState();
   const [modalVisible, setModalVisible] = useState(false);
+  const [recipeList, setRecipeList] = useState([]);
 
+  
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.item} onPress={() => alert(item.label)}>
       <Text style={styles.itemText}>{item.label}</Text>
@@ -78,6 +81,7 @@ export default function App({ navigation, route }) {
         id: id
       })
     });
+      
       const data = await response.json();
       const dataList = data.split('"');
       const ingredientName = dataList[3];
@@ -87,31 +91,30 @@ export default function App({ navigation, route }) {
       setIngredientList([...ingredientList, ingredient]);
       setNewIngredient({ ingredientName: '', unit: '' });
       setSelectedOption(null);
+      route.params.fetchRecipes([...ingredientList, ingredient]);
+      
     } catch (error) {
       console.error('Error adding ingredient:', error);
     }
   };
 
   const handleRemoveIngredient = async (removeIngredient) => {
-    console.log(removeIngredient);
     const updatedList = ingredientList.filter(ingredient => {
-      console.log(removeIngredient)
       return ingredient.ingredientName !== removeIngredient;
     });
     setIngredientList(updatedList);
+    route.params.fetchRecipes(updatedList);
     try {
-      
-    const response = await fetch(`http://192.168.1.93:3000/deleteIngredient/${id}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        ingredient: removeIngredient,
-        id: id
-      })
-    });
-    
+      const response = await fetch(`http://192.168.1.93:3000/deleteIngredient/${id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ingredient: removeIngredient,
+          id: id
+        })
+      });
     } catch (error) {
       console.error('Error deleting ingredient:', error);
     }
@@ -160,8 +163,6 @@ export default function App({ navigation, route }) {
         </TouchableOpacity>
       </View>
 
-
-
       <FlatList
         data={ingredientList}
         keyExtractor={(item, index) => index.toString()}
@@ -171,8 +172,8 @@ export default function App({ navigation, route }) {
         showsVerticalScrollIndicator={false}
         style={{ flex: 1, maxHeight: 4 * 70, width: '100%' }}
       />
+      <MenuBar navigation={navigation} id={id} staticIngredientList={ingredientList} />
 
-      {menuBar({ navigation, id })}
     </View>
   );
 }

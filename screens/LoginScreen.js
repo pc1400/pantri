@@ -27,11 +27,10 @@ const LoginScreen = ({ navigation }) => {
         })
         .then(data => {
           const id = data;
-          fetch(`http://192.168.1.93:3000/testRecipes/${id}`)
-          .then(response => response.json())
-            .then(recipes => {
-              navigation.navigate('Home', { id: id, recipeList: recipes });
-          }).catch(error => console.error(error));
+          fetch(`http://192.168.1.93:3000/pantry/${id}`)
+            .then(data => data.json())
+            .then(res => JSON.parse(res))
+            .then(ingredientList => navigation.navigate('Home', { id: id, ingredientList: ingredientList }));
         })
         .catch(error => {
           console.error('There was a problem with the API call:', error);
