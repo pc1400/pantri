@@ -1,7 +1,6 @@
 
-import { Button, Text, View } from 'react-native';
+import { Button, Text, View, StyleSheet } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { styles } from "../components/StyleSheet.js";
 import AppHeader from "../components/AppHeader.js";
 import FeaturedMealsOverviewScreen from "../screens/mainRecipes.js";
 import { useFocusEffect } from '@react-navigation/native';
@@ -29,12 +28,19 @@ const HomeScreen = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <AppHeader />
+      <AppHeader/>
       <FeaturedMealsOverviewScreen navigation={navigation} id={id} recipeList={recipeList} fetchRecipes={fetchRecipes} />
       <MenuBar navigation={navigation} id={id} fetchRecipes={fetchRecipes} />
-
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    marginTop: '-10%'
+  },
+});
 
 export {HomeScreen};

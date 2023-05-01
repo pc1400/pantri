@@ -43,15 +43,25 @@ const IngredientItem = ({ ingredientName, unit, onCountZero }) => {
 };
 
 export default function App({ navigation, route }) {
-  const id = route.params.id; 
+  const id = route.params.id;
+
+  const combinedArray = [];
+  
+  useEffect(() => {
+    const scanIngredients = route.params.newIngredients || [];
+    const menuIngredientList = route.params.ingredientList || [];
+    const combinedArray = [...new Set([...menuIngredientList, ...scanIngredients])];
+    setIngredientList(combinedArray);
+  }, [route.params.newIngredients, route.params.ingredientList]);
 
   const [newIngredient, setNewIngredient] = useState({ ingredientName: '', unit: '' });
-  const [ingredientList, setIngredientList] = useState(route.params.ingredientList);
+  const [ingredientList, setIngredientList] = useState(combinedArray);
   const [selectedOption, setSelectedOption] = useState();
   const [modalVisible, setModalVisible] = useState(false);
   const [recipeList, setRecipeList] = useState([]);
-
   
+  console.log(ingredientList);
+
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.item} onPress={() => alert(item.label)}>
       <Text style={styles.itemText}>{item.label}</Text>
@@ -70,7 +80,7 @@ export default function App({ navigation, route }) {
   const handleAddIngredient = async () => {
     Keyboard.dismiss();
     try {
-    const response = await fetch(`http://192.168.1.93:3000/pantry/${id}`, {
+    const response = await fetch(`http://192.168.1.93:3000/addIngredient/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

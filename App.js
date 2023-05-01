@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { HomeScreen } from './screens/HomeScreen.js';
 import FeaturedMealsOverviewScreen from './screens/FeaturedMealsOverviewScreen.js';
@@ -16,6 +17,7 @@ import SignUpScreen from './screens/SignUpScreen.js';
 import IngredientList from './screens/IngredientList.js';
 import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Hamburger from './components/Hamburger.js';
 
 
 const Stack = createNativeStackNavigator();
@@ -34,7 +36,7 @@ const CustomHeader = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={handleLogout} style={styles.button}>
-        <Text style={styles.buttonText}>Log out</Text>
+        <MaterialCommunityIcons name="logout" size={24} color="black" />
       </TouchableOpacity>
     </View>
   );
@@ -75,14 +77,31 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#32CD32',
-    borderRadius: 4,
+    borderColor: '#32CD32',
+    borderRadius: 8,
+    borderWidth: 2,
     paddingHorizontal: 12,
     paddingVertical: 8,
+    width: 50, // increase width
+    height: 40, // increase height
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
-  },
+    textTransform: 'uppercase',
+    fontSize: 16,
+    letterSpacing: 1,
+  }
 });
 
 export default App;

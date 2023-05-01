@@ -1,17 +1,23 @@
-
-import React from 'react'
 import { Platform, StyleSheet, Text, View, Image, Button, Alert, Pressable } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
-import * as Permissions from 'expo-permissions'
+import { Camera } from 'expo-camera'
 // this button could be used for our main page when naviagting
 // to the specific recipe types
 import { styles } from "../StyleSheet.js";
 import * as ImageManipulator from 'expo-image-manipulator';
 
-function ScanButton({ children, color, onPress, navigation, ingredientList, id }) {
+async function askForCameraPermission() {
+    const { status } = await Camera.requestCameraPermissionsAsync();
+    if (status !== 'granted') {
+        alert('Sorry, we need camera permissions to make this work!');
+        return false;
+    }
+    return true;
+}
 
+function ScanButton({ navigation, ingredientList, id }) {
+    askForCameraPermission();
     takeImage = async () => {
-    // launch the camera with the following settings
         let image = await ImagePicker.launchCameraAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
@@ -19,42 +25,35 @@ function ScanButton({ children, color, onPress, navigation, ingredientList, id }
             quality: 0.01,
             base64: true,
         })
-        // make sure a image was taken:
         if (!image.canceled) {
-            console.log("OK");
-            navigation.navigate('Pantry', { ingredientList, id });
-            // fetch('https://pantri-server.herokuapp.com/scan', {
-            //     method: 'POST',
-            //     headers: {
-            //         Accept: 'application/json',
-            //         'Content-Type': 'application/json',
-            //     },
-            //     // send our base64 string as POST request
-            //     body: JSON.stringify({
-            //         imgsource: image.base64,
-            //     }),
-            // })
+            fetch(`http://192.168.1.93:3000/scan/${id}`, {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    imgsource: image.base64,
+                }),
+            }).then(res => res.json()).then(data => {
+                navigation.navigate('Pantry', { id, newIngredients: data })
+            });
             
         } else {
             navigation.navigate('Home', { id })
         }
     }
-    
     return (
-    <View style={styles.roundButton}>
-        <Pressable onPress={takeImage}>
-            <View>
-                <Image 
-                    style={styles.tinyLogo}
-                    source={require('../../assets/scan-black.png')}
-                />
-            </View>
-        </Pressable>
-    </View>
+        <View style={styles.roundButton}>
+            <Pressable onPress={takeImage}>
+                <View>
+                    <Image
+                        style={styles.tinyLogo}
+                        source={require('../../assets/scan-black.png')}
+                    />
+                </View>
+            </Pressable>
+        </View>
     );
 }
 export default ScanButton;
-
-
-
-  {/* <Text style={styles.logoText}>Recipes</Text> */}

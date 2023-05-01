@@ -31,14 +31,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     paddingHorizontal: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e5e5',
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    marginVertical: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 3,
   },
   image: {
     width: 80,
     height: 80,
-    marginRight: 10,
-    borderRadius: 5,
+    marginRight: 15,
+    borderRadius: 30,
   },
   textContainer: {
     flex: 1,
@@ -47,14 +53,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     marginBottom: 5,
+    color: '#333',
   },
   prepTime: {
     color: '#666',
     marginBottom: 2,
+    fontSize: 12,
   },
   matchingIngredients: {
     color: '#999',
+    fontSize: 12,
   },
 });
+
 
 export default RecipeButton;

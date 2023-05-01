@@ -9,7 +9,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 
 const FeaturedMealsOverviewScreen = ({ navigation, id, recipeList, fetchRecipes }) => {
   const [filteredRecipeList, setFilteredRecipeList] = useState([]);
-  
+
   useEffect(() => {
     const filteredList = recipeList.filter(recipe => recipe.matchingIngredients.length > 0);
     setFilteredRecipeList(filteredList);
@@ -25,7 +25,7 @@ const FeaturedMealsOverviewScreen = ({ navigation, id, recipeList, fetchRecipes 
 
   return (
     <View style={styles.listscrollview}>
-      <ScrollView>
+      <ScrollView style={styles.listscrollview}>
         {recipeButtons}
       </ScrollView>
     </View>
@@ -42,13 +42,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   buttonContainer: {
-    marginBottom: 10,
-    marginTop: 10,
-    backgroundColor: '#ccc',
+    marginBottom: 2,
+    marginTop: 2,
     borderRadius: 10,
     padding: 10,
   },
   listscrollview: {
+    flexGrow: 1,
+    paddingBottom: 20,
+    marginBottom: '25%',
     margin: 0,
   },
 });
