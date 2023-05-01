@@ -17,7 +17,7 @@ const LoginScreen = ({ navigation }) => {
       const value = await AsyncStorage.getItem('isLoggedIn');
       if (value !== null && value !== 'false') {
         const id = await AsyncStorage.getItem('id');
-        fetch(`http://192.168.1.93:3000/pantry/${id}`)
+        fetch(`https://pantri-server.herokuapp.com/pantry/${id}`)
             .then(data => data.json())
             .then(res => JSON.parse(res))
             .then(async ingredientList => {
@@ -31,7 +31,7 @@ const LoginScreen = ({ navigation }) => {
 
 
   const handleLogin = async () => {
-      fetch('http://192.168.1.93:3000/login', {
+      fetch('https://pantri-server.herokuapp.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ const LoginScreen = ({ navigation }) => {
         })
         .then(data => {
           const id = data;
-          fetch(`http://192.168.1.93:3000/pantry/${id}`)
+          fetch(`https://pantri-server.herokuapp.com/pantry/${id}`)
             .then(data => data.json())
             .then(res => JSON.parse(res))
             .then(async ingredientList => {

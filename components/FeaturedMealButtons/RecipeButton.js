@@ -9,7 +9,7 @@ const RecipeButton = ({ recipe, navigation, id, fetchRecipes }) => {
       onPress={() => navigation.navigate('Recipe Details', { id: id, recipe: recipe, onFetchRecipes: fetchRecipes })}
       style={styles.recipeButton}
     >
-      <Image source={{ uri: `http://192.168.1.93:3000/recipes/${recipe._id}/image` }} style={styles.image} />
+      <Image source={{ uri: `https://pantri-server.herokuapp.com/recipes/${recipe._id}/image` }} style={styles.image} />
 
       <View key={recipe._id} style={styles.textContainer}>
         <Text style={styles.recipeName}>{recipe.title}</Text>

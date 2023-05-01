@@ -51,10 +51,6 @@ const App = () => {
         <Stack.Screen options={{ header: () => <CustomHeader />, animation: 'fade' }} name="Home" component={HomeScreen} />
         <Stack.Screen options={{ header: () => <CustomHeader />, animation: 'fade' }} name="Pantry" component={IngredientList} />
         <Stack.Screen options={{ headerShown: false, animation: 'fade' }} name="Recipe Details" component={RecipeDetailsScreen} />
-        <Stack.Screen options={{ animation: 'fade' }} name="Pancakes" component={PancakesDetailScreen} />
-        <Stack.Screen options={{ animation: 'fade' }} name="Salad with Smoked Salmon" component={SaladDetailScreen}/>
-        <Stack.Screen options={{ animation: 'fade' }} name="Creamy Indian Chicken Curry" component={CreamyIndianDetailScreen}/>
-        <Stack.Screen options={{ animation: 'fade' }} name="Asparagus Salad with Cherry Tomatoes" component={AsparagusDetailScreen}/>
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

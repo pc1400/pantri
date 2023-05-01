@@ -44,9 +44,6 @@ const IngredientItem = ({ ingredientName, unit, onCountZero }) => {
 
 export default function App({ navigation, route }) {
   const id = route.params.id;
-
-  const combinedArray = [];
-  
   useEffect(() => {
     const scanIngredients = route.params.newIngredients || [];
     const menuIngredientList = route.params.ingredientList || [];
@@ -55,12 +52,10 @@ export default function App({ navigation, route }) {
   }, [route.params.newIngredients, route.params.ingredientList]);
 
   const [newIngredient, setNewIngredient] = useState({ ingredientName: '', unit: '' });
-  const [ingredientList, setIngredientList] = useState(combinedArray);
+  const [ingredientList, setIngredientList] = useState(route.params.ingredientList);
   const [selectedOption, setSelectedOption] = useState();
   const [modalVisible, setModalVisible] = useState(false);
   const [recipeList, setRecipeList] = useState([]);
-  
-  console.log(ingredientList);
 
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.item} onPress={() => alert(item.label)}>
@@ -80,17 +75,19 @@ export default function App({ navigation, route }) {
   const handleAddIngredient = async () => {
     Keyboard.dismiss();
     try {
-    const response = await fetch(`http://192.168.1.93:3000/addIngredient/${id}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        ingredient: newIngredient.ingredientName,
-        unit: newIngredient.unit,
-        id: id
-      })
-    });
+      const url1 = `http://192.168.1.93:3000/addIngredient/${id}`;
+      const url2 = `https://pantri-server.herokuapp.com/addIngredient/${id}`;
+      const response = await fetch(url2, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ingredient: newIngredient.ingredientName,
+          unit: newIngredient.unit,
+          id: id
+        })
+      });
       
       const data = await response.json();
       const dataList = data.split('"');
@@ -100,9 +97,7 @@ export default function App({ navigation, route }) {
 
       setIngredientList([...ingredientList, ingredient]);
       setNewIngredient({ ingredientName: '', unit: '' });
-      setSelectedOption(null);
-      route.params.fetchRecipes([...ingredientList, ingredient]);
-      
+      setSelectedOption(null);      
     } catch (error) {
       console.error('Error adding ingredient:', error);
     }
@@ -113,9 +108,11 @@ export default function App({ navigation, route }) {
       return ingredient.ingredientName !== removeIngredient;
     });
     setIngredientList(updatedList);
-    route.params.fetchRecipes(updatedList);
     try {
-      const response = await fetch(`http://192.168.1.93:3000/deleteIngredient/${id}`, {
+      const url1 = `http://192.168.1.93:3000/deleteIngredient/${id}`;
+      const url2 = `https://pantri-server.herokuapp.com/deleteIngredient/${id}`;
+
+      const response = await fetch(url2, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

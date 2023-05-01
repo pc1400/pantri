@@ -8,7 +8,7 @@ import ScanButton from "../components/PantryPageComponents/ScanButton.js";
 import { useFocusEffect } from '@react-navigation/native';
 
 
-const MenuBar = ({ navigation, id, fetchRecipes, staticIngredientList }) => {
+const MenuBar = ({ navigation, id, staticIngredientList }) => {
   if (!id) {
     id = "6444b1de1617602408f8a412";
   }
@@ -19,7 +19,7 @@ const MenuBar = ({ navigation, id, fetchRecipes, staticIngredientList }) => {
     React.useCallback(() => {
       const fetchData = async () => {
         try {
-          const data = await fetch(`http://192.168.1.93:3000/pantry/${id}`);
+          const data = await fetch(`https://pantri-server.herokuapp.com/pantry/${id}`);
           const result = await data.json();
           const parsedData = JSON.parse(result);
           setIngredientList(parsedData);
@@ -54,10 +54,10 @@ const MenuBar = ({ navigation, id, fetchRecipes, staticIngredientList }) => {
           }
         />
         </Pressable>
-      <ScanButton navigation={navigation} ingredientList={ingredientList} id={id}></ScanButton>
+      <ScanButton navigation={navigation} ingredientList={ingredientList} id={id} ></ScanButton>
       <Pressable style={styles.menubutton}
         onPress={() =>
-          navigation.navigate('Pantry', { ingredientList, id, fetchRecipes })
+          navigation.navigate('Pantry', { ingredientList, id })
         }
       ><Image
       style={styles.tinyLogo}

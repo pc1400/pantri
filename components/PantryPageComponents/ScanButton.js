@@ -16,6 +16,7 @@ async function askForCameraPermission() {
 }
 
 function ScanButton({ navigation, ingredientList, id }) {
+    // console.log("HEY");
     askForCameraPermission();
     takeImage = async () => {
         let image = await ImagePicker.launchCameraAsync({
@@ -26,7 +27,7 @@ function ScanButton({ navigation, ingredientList, id }) {
             base64: true,
         })
         if (!image.canceled) {
-            fetch(`http://192.168.1.93:3000/scan/${id}`, {
+            fetch(`https://pantri-server.herokuapp.com/scan/${id}`, {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',

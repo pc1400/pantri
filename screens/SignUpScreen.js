@@ -8,7 +8,7 @@ const SignUpScreen = ({ navigation }) => {
   const handleSignUp = async () => {
     // Call the API to create a new user account
     console.log("HEY");
-    const response = await fetch('http://192.168.1.93:3000/user', {
+    const response = await fetch('https://pantri-server.herokuapp.com/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
