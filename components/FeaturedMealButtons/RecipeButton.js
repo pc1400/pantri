@@ -5,12 +5,13 @@ const RecipeButton = ({ recipe, navigation, id, fetchRecipes }) => {
   const hasMatchingIngredients = recipe.matchingIngredients.length > 0;
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('Recipe Details', { id: id, recipe: recipe, fetchRecipes: fetchRecipes })}
+      key={recipe._id}
+      onPress={() => navigation.navigate('Recipe Details', { id: id, recipe: recipe, onFetchRecipes: fetchRecipes })}
       style={styles.recipeButton}
     >
       <Image source={{ uri: `http://192.168.1.93:3000/recipes/${recipe._id}/image` }} style={styles.image} />
 
-      <View style={styles.textContainer}>
+      <View key={recipe._id} style={styles.textContainer}>
         <Text style={styles.recipeName}>{recipe.title}</Text>
         <Text style={styles.prepTime}>Prep time: {recipe.time} minutes</Text>
         <Text style={styles.matchingIngredients}>

@@ -4,8 +4,6 @@ import { FontAwesome } from '@expo/vector-icons';
 import MenuBar from '../screens/menubar';
 
 const RecipeDetails = ({ navigation, id, recipe, fetchRecipes }) => {
-  // const steps = recipe.steps.split(".");
-
   return (
     <View style={styles.container}>
       {/* <Image source={{ uri: recipe.photoURL }} style={styles.photo} /> */}

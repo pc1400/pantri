@@ -9,16 +9,19 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 
 const FeaturedMealsOverviewScreen = ({ navigation, id, recipeList, fetchRecipes }) => {
   const [filteredRecipeList, setFilteredRecipeList] = useState([]);
-
+  
   useEffect(() => {
     const filteredList = recipeList.filter(recipe => recipe.matchingIngredients.length > 0);
     setFilteredRecipeList(filteredList);
   }, [recipeList]);
-  const recipeButtons = filteredRecipeList.map(recipe => (
-    <View style={styles.buttonContainer}>
-      <RecipeButton recipe={recipe} navigation={navigation} id={id} key={recipe.id} fetchRecipes={fetchRecipes} />
-    </View>
-  ));
+
+  const recipeButtons = filteredRecipeList.map((recipe, index) => 
+    (
+      <View key={index} style={styles.buttonContainer}>
+        <RecipeButton recipe={recipe} navigation={navigation} id={id} key={`${index}`} fetchRecipes={fetchRecipes} />
+      </View>
+    )
+  );
 
   return (
     <View style={styles.listscrollview}>

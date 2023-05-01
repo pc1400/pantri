@@ -1,11 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import SignUpScreen from './SignUpScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    checkIfLoggedIn();
+  }, []);
+
+  const checkIfLoggedIn = async () => {
+    try {
+      const value = await AsyncStorage.getItem('isLoggedIn');
+      if (value !== null && value !== 'false') {
+        const id = await AsyncStorage.getItem('id');
+        fetch(`http://192.168.1.93:3000/pantry/${id}`)
+            .then(data => data.json())
+            .then(res => JSON.parse(res))
+            .then(async ingredientList => {
+              navigation.navigate('Home', { id: id, ingredientList: ingredientList })
+            });    
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   const handleLogin = async () => {
       fetch('http://192.168.1.93:3000/login', {
@@ -30,7 +53,11 @@ const LoginScreen = ({ navigation }) => {
           fetch(`http://192.168.1.93:3000/pantry/${id}`)
             .then(data => data.json())
             .then(res => JSON.parse(res))
-            .then(ingredientList => navigation.navigate('Home', { id: id, ingredientList: ingredientList }));
+            .then(async ingredientList => {
+              await AsyncStorage.setItem('isLoggedIn', 'true');
+              await AsyncStorage.setItem('id', id);
+              navigation.navigate('Home', { id: id, ingredientList: ingredientList })
+            });    
         })
         .catch(error => {
           console.error('There was a problem with the API call:', error);
